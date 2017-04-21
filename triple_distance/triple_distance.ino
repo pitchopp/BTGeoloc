@@ -11,7 +11,6 @@ void setup() {
 }
 
 void loop() {
-  
   printTripleDistance();
 }
 

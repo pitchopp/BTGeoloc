@@ -3,7 +3,7 @@
 #include "config.h"
 
 SoftwareSerial mySerial(RX_ARDUINO, TX_ARDUINO);
-	
+  
 String getSerialString(){
   char c;
   int i=0;
@@ -22,22 +22,22 @@ String getSerialString(){
 void initMaster()
 {
   int i;
-	
-	mySerial.begin(9600);
-	
-	Serial.println("Setting hm-10 Master...");
-	delay(1000);
-	mySerial.print("AT");
-	
-	
-	mySerial.print("AT+RENEW");
-	getSerialString();
-	
-	mySerial.print("AT+RESET");
-	getSerialString();
-	
-	mySerial.print("AT+NAMEMaster");
-	getSerialString();
+  
+  mySerial.begin(9600);
+  
+  Serial.println("Setting hm-10 Master...");
+  delay(1000);
+  mySerial.print("AT");
+  
+  
+  mySerial.print("AT+RENEW");
+  getSerialString();
+  
+  mySerial.print("AT+RESET");
+  getSerialString();
+  
+  mySerial.print("AT+NAMEMaster");
+  getSerialString();
   
    mySerial.print("AT+MODE1");
    getSerialString();
@@ -45,13 +45,13 @@ void initMaster()
   mySerial.print("AT+IMME1");
   getSerialString();
   
-	mySerial.print("AT+ROLE1");
-	getSerialString();
+  mySerial.print("AT+ROLE1");
+  getSerialString();
 
   mySerial.print("AT+RESET");
   getSerialString();
-  	
-	Serial.println("Settings finished...");
+    
+  Serial.println("Settings finished...");
 
   Serial.println();
 
@@ -130,7 +130,7 @@ float getRssi(String mac)
 
 float calculateDistance(float rssi)
 {
-  return(pow(10, rssi/(10*FACTEUR))/1000);
+  return(pow(10, (rssi-TX_POWER)/(10*FACTEUR)));
 }
 
 float getDistance(String mac)
@@ -192,4 +192,39 @@ void printTripleRssi(){
   printRssi(MAC_3);
 }
 
+
+
+float A = 2*(X2 - X1);
+float B = 2*(Y2 - Y1);
+
+float D = 2*(X3 - X2);
+float E = 2*(Y3 - Y2);
+
+
+float getX(float d1, float d2, float d3){
+
+  float C = d1*d1 - d2*d2 - X1*X1 + X2*X2 - Y1*Y1 + Y2*Y2;
+  float F = d2*d2 - d3*d3 - X2*X2 + X3*X3 - Y2*Y2 + Y3*Y3;
+
+  return (C*E - F*B)/(A*E - B*D);
+  
+}
+
+float getY(float d1, float d2, float d3){
+
+  float C = d1*d1 - d2*d2 - X1*X1 + X2*X2 - Y1*Y1 + Y2*Y2;
+  float F = d2*d2 - d3*d3 - X2*X2 + X3*X3 - Y2*Y2 + Y3*Y3;
+
+  return (A*F - C*D)/(A*E - B*D);
+  
+}
+
+void printCoordinates(float d1, float d2, float d3){
+
+  Serial.print("X : ");
+  Serial.println(getX(d1,d2,d3));
+  Serial.print("Y : ");
+  Serial.println(getY(d1,d2,d3));
+  
+}
 

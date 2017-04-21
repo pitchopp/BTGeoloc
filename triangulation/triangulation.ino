@@ -10,10 +10,10 @@ void setup() {
 
 void loop() {
   
-  printCoordinates(
+  /*printCoordinates(
     getDistance(MAC_1),
     getDistance(MAC_2),
-    getDistance(MAC_3));
-  Serial.println();
+    getDistance(MAC_3));*/
+  printTripleDistance();
 }
 

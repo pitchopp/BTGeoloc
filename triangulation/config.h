@@ -8,9 +8,9 @@
 
 // distance calculation model
 
-#define FACTEUR 2
-
-#define PRECISION 1
+#define FACTEUR 2.5
+#define TX_POWER 60
+#define PRECISION 10
 
 //defining beacon adresses
 
@@ -19,12 +19,12 @@
 #define MAC_3 "884AEA7BBBE8"
 
 // defining beacons coordinates
-#define X1 1
-#define Y1 0
+#define X1 4
+#define Y1 3
 
-#define X2 0
-#define Y2 0
+#define X2 1
+#define Y2 8
 
-#define X3 -2
-#define Y3 -1
+#define X3 0
+#define Y3 3
 

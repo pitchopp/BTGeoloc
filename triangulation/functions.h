@@ -25,7 +25,7 @@ void initMaster()
   
   mySerial.begin(9600);
   
-  Serial.println("Setting hm-10 Master...");
+ // Serial.println("Setting hm-10 Master...");
   delay(1000);
   mySerial.print("AT");
   
@@ -51,30 +51,30 @@ void initMaster()
   mySerial.print("AT+RESET");
   getSerialString();
     
-  Serial.println("Settings finished...");
+ // Serial.println("Settings finished...");
 
-  Serial.println();
+ // Serial.println();
 
   for(i=0; i< 26+PRECISION; i++)
   {
-    Serial.print("-");
+   // Serial.print("-");
   }
-  Serial.println();
+ // Serial.println();
   
-  Serial.print("|  MAC Adress  ");
+ // Serial.print("|  MAC Adress  ");
   
   for(i=0; i<PRECISION; i++)
   {
-    Serial.print("-");
+   // Serial.print("-");
   }
   
-  Serial.println(" Distance |");
+ // Serial.println(" Distance |");
 
   for(i=0; i< 26+PRECISION; i++)
   {
-    Serial.print("-");
+   // Serial.print("-");
   }
-  Serial.println();
+ // Serial.println();
 }
 
 
@@ -95,7 +95,7 @@ float getRssi(String mac)
 
 
   
-  Serial.print(" ");
+ // Serial.print(" ");
   
   for(i=0; i<PRECISION; i++){
     
@@ -105,7 +105,7 @@ float getRssi(String mac)
     rssi = getSerialString().substring(7,10);
     if(rssi.toInt() < 0)
     {
-      Serial.print("-");
+     // Serial.print("-");
       average = (average*counter - rssi.toInt())/(counter+1);
       counter++;
     }
@@ -114,30 +114,32 @@ float getRssi(String mac)
       delay(2000);
       mySerial.print("AT+CON" + mac);
       getSerialString();
-      Serial.print("x");
+     // Serial.print("x");
     }
   }
   
-  Serial.print("  ");
+ // Serial.print("  ");
   
   
   mySerial.print("AT");
 
   delay(2000);
-
+ // Serial.println(average);
   return(average);
 }
 
 float calculateDistance(float rssi)
 {
-  return(pow(10, rssi/(10*FACTEUR))/1000);
+  return(pow(10, (rssi-TX_POWER)/(10*FACTEUR)));
 }
 
 float getDistance(String mac)
 {
   //Serial.println("Getting distance from " + mac);
   //digitalWrite(LED, HIGH);
-  return(calculateDistance(getRssi(mac)));
+  float d = calculateDistance(getRssi(mac));
+ // Serial.println(d);
+  return(d);
   
 }
 
@@ -145,41 +147,41 @@ void printDistance(String mac)
 {
   int i;
   
-  digitalWrite(LED, HIGH);
-  Serial.print("| ");
-  Serial.print(mac);
-  Serial.print(getDistance(mac));
-  Serial.println(" m  |");
+  //digitalWrite(LED, HIGH);
+ // Serial.print("| ");
+ // Serial.print(mac);
+ Serial.println(getDistance(mac));
+ // Serial.println(" m  |");
   for(i=0; i< 26+PRECISION; i++)
   {
-    Serial.print("-");
+   // Serial.print("-");
   }
-  Serial.println();
-  digitalWrite(LED, LOW);
+ // Serial.println();
+  //digitalWrite(LED, LOW);
 }
 
 void printRssi(String mac){
   int i;
   
   digitalWrite(LED, HIGH);
-  Serial.print("| ");
-  Serial.print(mac);
-  Serial.print(getRssi(mac));
-  Serial.println(" m  |");
+ // Serial.print("| ");
+ // Serial.print(mac);
+ // Serial.print(getRssi(mac));
+ // Serial.println(" m  |");
   for(i=0; i< 26+PRECISION; i++)
   {
-    Serial.print("-");
+   // Serial.print("-");
   }
-  Serial.println();
+ // Serial.println();
   digitalWrite(LED, LOW);
 }
 
 void printTripleDistance(){
-  delay(2000);
+  delay(1000);
   printDistance(MAC_1);
-  delay(2000);
+  delay(1000);
   printDistance(MAC_2);
-  delay(2000);
+  delay(1000);
   printDistance(MAC_3);
 }
 

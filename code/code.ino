@@ -13,8 +13,8 @@ void setup() {
 
 void loop() {
   //if(digitalRead(BUTTON) == LOW){
-  printDistance("5065831B35F8");
-  delay(3000);
+  delay(1000);
+  printDistance(MAC_2);
   //}
 }
 
