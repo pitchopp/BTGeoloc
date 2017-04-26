@@ -10,7 +10,7 @@
 
 #define FACTEUR 2.5
 #define TX_POWER 60
-#define PRECISION 10
+#define PRECISION 1
 
 //defining beacon adresses
 
@@ -19,12 +19,12 @@
 #define MAC_3 "884AEA7BBBE8"
 
 // defining beacons coordinates
-#define X1 4
-#define Y1 3
+#define X1 4.5
+#define Y1 5
 
-#define X2 1
-#define Y2 8
+#define X2 4
+#define Y2 10
 
-#define X3 0
-#define Y3 3
+#define X3 1
+#define Y3 7
 
