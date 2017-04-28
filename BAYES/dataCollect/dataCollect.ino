@@ -5,17 +5,21 @@ void setup() {
   Serial.begin(9600);
   while(!Serial){
   }
-  //initMaster();
+  initMaster();
   int b[NB+1];
   for (i=0;i<NB+1;i++){
     b[i] = 0;
   }
-  getRssiDistribution(b, 3, MAC_1);
+
+  getRssiDistribution(b, 20000, MAC_2);
   for (i=0;i<NB+1;i++){
-    Serial.print(b[i]);
-    Serial.print("|");
+    if(b[i] > 0){
+    Serial.print(i);
+    Serial.print(" - ");
+    Serial.println(b[i]);
+    }
   }
-  Serial.println();
+  
 }
 
 void loop() {

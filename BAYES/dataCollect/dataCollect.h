@@ -12,11 +12,12 @@ String getSerialString(){
     delay(10);
     i++;
   }
-  delay(100);
+  delay(200);
   while(mySerial.available()){
     c = mySerial.read();
     s += c;
   }
+  //Serial.println(s);
   return s;
 }
 
@@ -25,9 +26,10 @@ void initMaster()
   int i;
   
   mySerial.begin(9600);
-  
+  Serial.println("Settings");
   delay(1000);
   mySerial.print("AT");
+  delay(1000);
   
   
   mySerial.print("AT+RENEW");
@@ -50,7 +52,8 @@ void initMaster()
 
   mySerial.print("AT+RESET");
   getSerialString();
-  
+
+  Serial.println("DONE");
 }
 
 int getRssi(String mac)
@@ -58,7 +61,6 @@ int getRssi(String mac)
   
   String rssi;
   int counter, i=0;
-  float average = 0;
 
   counter = 0;
 
@@ -101,15 +103,33 @@ void printRssi(String mac){
  Serial.println();
 }
 
+bool connectMac(String mac){
+  mySerial.print("AT+CON" + mac);
+  String response = getSerialString();
+  mySerial.print("AT+RSSI?");
+  response = getSerialString();
+  return (response.substring(0,2) == "OK");
+}
+
+
 void getRssiDistribution(int a[], int n, String mac){
-  int i;
-  for(i=0; i<n; i++){
-    int rssi = 70;
-    if (rssi < NB && rssi >= 0){
-      a[rssi] = a[rssi]+1;
-      a[NB] = a[NB] + 1;
-    }
+  
+  String s;
+  int i, rssi;
+  
+  while(!connectMac(mac)){
+    Serial.println("reconnecting");
+    delay(1000);
   }
-  
-  
+    for(i=0; i<n; i++){
+      
+    mySerial.print("AT+RSSI?");
+    s = getSerialString().substring(7,10);
+    rssi = -s.toInt();
+    Serial.println(i);
+      if (rssi < NB && rssi >= 0){
+        a[rssi] = a[rssi]+1;
+        a[NB] = a[NB] + 1;
+      }
+    }
 }
