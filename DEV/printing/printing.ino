@@ -6,12 +6,8 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  Serial.println(100);
+  Serial.println("1.2|5.6|5.5");
   delay(1000);
-  Serial.println(100);
-  delay(1000);
-  Serial.println(200);
-  delay(1000);
-  Serial.println(200);
+  Serial.println("5|5|3");
   delay(1000);
 }

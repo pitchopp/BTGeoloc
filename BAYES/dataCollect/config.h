@@ -28,3 +28,7 @@
 #define X3 1
 #define Y3 7
 
+// Data collect
+
+#define NB 150
+
