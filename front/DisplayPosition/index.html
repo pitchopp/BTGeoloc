@@ -110,7 +110,7 @@
         $("#slider").slider();
         $("#slider").slider("value", 70);
         $("#slider").slider({
-			change: function(event, ui){
+			slide: function(event, ui){
             			colorZones(ui.value);
 
                 document.getElementById("P1").innerHTML = calculateProbability(1,ui.value);
