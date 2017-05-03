@@ -3,16 +3,49 @@
 <head>
     <meta charset="utf-8">
     <title>Géoloc indoor</title>
+
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+	<style>#slider { margin: 10px; }	</style>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/svg.js/2.6.1/svg.js"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 
 <body>
+	<h1 id="P1"></h1>
+	<h1 id="P2"></h1>
+	<h1 id="P3"></h1>
+	<h1 id="P4"></h1>
+	<h1 id="P5"></h1>
+	<h1 id="P6"></h1>
+	<h1 id="P7"></h1>
+
 	<div id="drawing">
+
 	</div>
 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/svg.js/2.6.1/svg.js"></script>
+	<div id="slider">
+
+	</div>
+
+
 	<script>
 
-		var draw = SVG('drawing').size(1300,1000);
+
+
+		var D1 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.01,0.305,0.075,0.055,0.14,10.425,5.39,10.205,3.495,4.135,5.57,1.76,2.15,12.475,12.425,15.655,10.495,3.26,0.91,0.34,0.15,0.19,0.22,0.115,0.04,0.01,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+		var D2 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.025,0.025,2.555,0.285,7.36,13.96,22.155,5.01,22.44,10.31,3.855,1.875,3.18,1,1.395,1.245,0.445,0.54,1.63,0.55,0.095,0.03,0.02,0.01,0.005,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+        var D3 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.01,0.12,6.17,7.77,11.7,3.5,3.39,13.96,3.86,16.21,30.01,2.03,1.06,0.12,0.06,0.02,0.01,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+        var D4 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.04,6.33,7.71,9.18,15.53,5.32,4.97,2,4.58,0.45,2.68,1.78,7.87,4.38,3.92,5.88,8.05,6.19,1.49,0.72,0.59,0.28,0.06,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+        var D5 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.01,0.76,2.58,7.81,18,7.69,12.87,9.69,2.57,10,7.47,3.5,4.93,2.15,2.35,4.18,1.55,1,0.59,0.29,0.01,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+        var D6 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.01,0.01,1.15,6.12,6.03,5.28,6.58,5.77,8.93,6.67,2.61,10.2,12.5,4.73,4.67,3.07,5.26,2.43,3.11,0.11,0.27,0.24,0.51,1.47,0.9,0.11,0.17,0.42,0.43,0.16,0.08,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+        var D7 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.01,0.02,0.04,0.19,17.95,13.14,38.23,35.44,12.01,16.67,38.12,3.2,6.65,0.89,1.64,1.63,5.95,1.6,0.51,0.24,0.39,1.39,1.65,2.27,0.15,0.01,0,0.01,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+        var Dsum = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.01,0.12,6.17,7.77,11.7,3.5,3.39,13.96,3.86,16.21,30.01,2.03,1.06,0.12,0.06,0.02,0.02,0.01,1.16,6.14,6.07,5.47,24.555,18.945,50.06,48.8,29.745,50.16,99.49,26.23,56.745,37.765,27.16,24.825,26.37,9.21,32.52,26,24.42,24.705,17.64,12.38,6.425,2.88,2.23,1.27,0.55,0.05,0.01,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+
+        var mesure = 70;
+
+        var draw = SVG('drawing').size(1300,1000);
 		draw.rect(1300, 1000).fill('#E0E0E0').stroke('#000000').stroke({width:20});
 		draw.line(500,0,500,500).stroke('#000000').stroke({width:10});
 		draw.line(150,500,500,500).stroke('#000000').stroke({width:10});
@@ -23,6 +56,71 @@
 		function showCoordinates(x, y){
 			draw.circle(30).move(x,y);
 		}
+
+		function calculateProbability(zone, mesure) {
+		    var p;
+            switch (zone) {
+				case 1:
+				    p = (D1[mesure]+0.01)/(Dsum[mesure]+0.07);
+				    break;
+				case 2:
+				    p = (D2[mesure]+0.01)/(Dsum[mesure]+0.07);
+				    break;
+				case 3:
+				    p = (D3[mesure]+0.01)/(Dsum[mesure]+0.07);
+				    break;
+				case 4:
+				    p = (D4[mesure]+0.01)/(Dsum[mesure]+0.07);
+				    break;
+				case 5:
+				    p = (D5[mesure]+0.01)/(Dsum[mesure]+0.07);
+				    break;
+				case 6:
+				    p = (D6[mesure]+0.01)/(Dsum[mesure]+0.07);
+				    break;
+				case 7:
+				    p = (D7[mesure]+0.01)/(Dsum[mesure]+0.07);
+				    break;
+            }
+            return p;
+		}
 		showCoordinates(200,200);
+
+
+        var zone1 = draw.rect(400,400).move(850,550).fill("#FF0000").opacity(calculateProbability(1,70));
+        var zone2 = draw.rect(100,300).move(100,600).fill("#FF0000").opacity(calculateProbability(2,70));
+        var zone3 = draw.rect(200,100).move(500,700).fill("#FF0000").opacity(calculateProbability(3,70));
+        var zone4 = draw.rect(300,100).move(100,100).fill("#FF0000").opacity(calculateProbability(4,70));
+        var zone5 = draw.rect(200,200).move(500,0).fill("#FF0000").opacity(calculateProbability(5,70));
+        var zone6 = draw.rect(200,200).move(500,400).fill("#FF0000").opacity(calculateProbability(6,70));
+        var zone7 = draw.rect(200,100).move(200,900).fill("#FF0000").opacity(calculateProbability(7,70));
+		function colorZones(m){
+		    zone1.opacity(calculateProbability(1,m));
+		    zone2.opacity(calculateProbability(2,m));
+		    zone3.opacity(calculateProbability(3,m));
+		    zone4.opacity(calculateProbability(4,m));
+		    zone5.opacity(calculateProbability(5,m));
+		    zone6.opacity(calculateProbability(6,m));
+		    zone7.opacity(calculateProbability(7,m));
+		}
+
+		colorZones(90);
+
+
+        $("#slider").slider();
+        $("#slider").slider("value", 70);
+        $("#slider").slider({
+			change: function(event, ui){
+            			colorZones(ui.value);
+
+                document.getElementById("P1").innerHTML = calculateProbability(1,ui.value);
+                document.getElementById("P2").innerHTML = calculateProbability(2,ui.value);
+                document.getElementById("P3").innerHTML = calculateProbability(3,ui.value);
+                document.getElementById("P4").innerHTML = calculateProbability(4,ui.value);
+                document.getElementById("P5").innerHTML = calculateProbability(5,ui.value);
+                document.getElementById("P6").innerHTML = calculateProbability(6,ui.value);
+                document.getElementById("P7").innerHTML = calculateProbability(7,ui.value);
+					}});
+
 	</script>
 </body>
