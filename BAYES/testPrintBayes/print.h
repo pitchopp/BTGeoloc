@@ -26,7 +26,7 @@ void initMaster()
   int i;
   
   mySerial.begin(9600);
-  Serial.println("Settings");
+  //Serial.println("Settings");
   delay(1000);
   mySerial.print("AT");
   delay(1000);
@@ -53,7 +53,7 @@ void initMaster()
   mySerial.print("AT+RESET");
   getSerialString();
 
-  Serial.println("DONE");
+  //Serial.println("DONE");
 }
 
 int getRssi(String mac)
@@ -119,5 +119,6 @@ void printRssiForProcessing(String mac){
   
     mySerial.print("AT+RSSI?");
     s = getSerialString().substring(8,10);
+    rssi = s.toInt();
     Serial.println(rssi);
 }

@@ -6,11 +6,13 @@ void setup() {
   }
   initMaster();
 
-  while(!connectMac(mac)){
+  while(!connectMac(MAC_2)){
+    //Serial.println("connecting");
     delay(1000);
   }
 }
 
 void loop() {
-  printRssiForProcessing();
+  printRssiForProcessing(MAC_2);
+  delay(2000);
 }

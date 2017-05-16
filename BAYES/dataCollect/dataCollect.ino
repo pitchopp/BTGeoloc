@@ -11,7 +11,7 @@ void setup() {
     b[i] = 0;
   }
 
-  getRssiDistribution(b, 20000, MAC_2);
+  getRssiDistribution(b, 10000, MAC_1);
   for (i=0;i<NB+1;i++){
     if(b[i] > 0){
     Serial.print(i);
